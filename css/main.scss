@@ -1,0 +1,654 @@
+@charset "utf-8";
+@import "_variables.scss";
+
+html { 
+    font-size: 62.5%; /* font-sizeは16pxの62.5%の10px */
+} 
+
+body {
+    overflow-x: hidden; 
+    font-size: 1.4rem;
+    line-height: 1.7;
+    margin: 0;
+    padding: 0;
+    background-color: #C4C5C7;
+}
+
+%a {
+    color: $colorLink;
+    &:hover {
+        color: $colorLinkHover;
+        text-decoration: underline;
+    }
+}
+a {
+      @extend %a;
+}
+#main-content-area{
+    a{
+        text-decoration: underline;
+    }
+}
+
+#page {
+  width: 100vw;
+  height: 100vh;
+
+  background-image: -webkit-linear-gradient(#EBEBEB 0%, #DCDDDF 48%, #C4C5C7 99%);
+  background-image: -o-linear-gradient(#EBEBEB 0%, #DCDDDF 48%, #C4C5C7 99%);
+  background-image: linear-gradient(#EBEBEB 0%, #DCDDDF 48%, #C4C5C7 99%);
+}
+
+
+.container{
+    padding-left: 0;
+    padding-right: 0;
+
+    background-color: #fff;
+    min-width: 320px;
+    box-shadow: 0 10px 10px 0 rgba(0, 0, 0, .3);
+
+}
+main[role="main"] {
+        padding-bottom:20px;
+}
+
+.textBox{
+    margin:15px;
+}
+
+
+/*List*/
+%li {
+    margin: 0;
+    padding: 0;
+    border: none;
+    border-bottom: 1px #ddd solid;
+    padding:0;
+    margin-top:5px;
+    margin-bottom:5px;
+    padding-bottom:10px;
+
+}
+
+ul{
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+    &.list{
+        li{
+            @extend %li;
+        }
+    }
+    &.articles{
+        list-style-type: square;
+        list-style-position: outside;
+        padding-left:20px;
+    }
+    &.notice{
+        list-style-type: square;
+        list-style-position: inside;
+        li{
+            @extend %li;
+        }
+    }
+     &.books{
+        list-style-type: square;
+        list-style-position: inside;
+        li{
+            @extend %li;
+        }
+         p{
+             padding:0 0 0 30px;
+         }
+    }
+        &.tab{
+        width:100%;
+        li{
+            float: left;
+            list-style: none;
+            cursor: pointer;
+            border-left:1px solid $colorGray;
+            margin:0 0 10px 0;
+            font-size:1.3rem;
+            padding: 0 15px;
+            &:hover,
+            &:hover{
+                background-color:$colorMain;
+                color:$colorMainText;
+            }
+            &:last-child{
+                border-right:1px solid $colorGray;
+            }
+            &.select {
+              background: $colorMain;
+              color:$colorMainText;
+            }
+        }
+    }
+
+}
+
+
+    
+ol {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+    &.list{
+        li{
+        @extend %li;
+        list-style:decimal;
+        list-style-position:inside;
+        }
+    }
+}
+
+
+hr{
+    .dot{
+        padding:0;
+        margin-top:5px;
+        margin-bottom:5px;
+        border-style:dotted;
+        border-color:#ddd;
+    }
+}
+
+h1,h2,h3,h4{
+        font-weight: 700;
+        color:$colorSpiceText;
+}
+
+h1{
+    background-image: url("../img/title_back.png");
+    background-position: top;
+    background-repeat: no-repeat;
+    color:$colorSpiceText;
+    vertical-align: middle;
+    font-weight: 700;
+    font-size: 1.9rem;
+    padding:1rem 0 0 0.5rem;
+    img{
+        vertical-align: middle;
+        margin:0 3px;
+    }
+    span{
+        vertical-align: middle;
+    }
+  
+}
+#demo-title{
+    p.demo-title-line{
+        padding:0;
+        margin:0;
+        background-image: url(../img/title_back.png);
+        height: 6px; 
+        border: 0px none;
+        overflow: hidden;
+    }
+    h1{
+        &.demo-title{
+            background-image: none;     
+            padding:0 0 0 0.5rem;
+        }
+        span{
+            vertical-align: middle;
+            margin-left:5px;
+        }
+    }
+}
+
+
+
+h2{
+	font-size: 1.8rem;
+    margin:1.5rem 0;
+    padding:0 0 5px 0;
+    border-bottom:dashed 2px $colorMain;
+    &.demo-title{
+        background-color:$colorMain;
+        color:$colorMainText;
+        font-weight: 700;
+        padding:5px 10px;
+        font-size: 2rem;
+    }
+}
+
+h3{
+	font-size: 1.7rem;
+    margin:1.5rem 0;
+    padding:0;
+    border-bottom:1px dotted $colorMain;
+}
+
+h4{
+	font-size: 1.4rem;
+    margin:0;
+}
+
+
+
+#navBar{
+        background-color: $colorMain !important;
+        display:flex;
+        flex-direction: row;
+        align-items:  flex-start;
+        flex-wrap:nowrap; 
+     
+        #nttLogo{
+            padding:.5rem 1rem;
+            width:20%;
+        }
+        #logo{
+            margin:10px 0;
+            width:70%;
+            display:flex;
+            flex-direction: row;
+            align-items:  flex-end;
+            flex-wrap:nowrap;
+            justify-content: center;
+            .sublogo{
+                display:none;
+                width:25%;
+                margin:3px 0 0px 0;
+                &.left{
+                    text-align:center;
+                    margin-right:10px;
+                }
+                &.right{
+                    text-align:center;
+                    margin-left:10px;
+                }
+            }
+            .logo{
+                width:60%;
+                padding:0px;
+                margin: 0;
+                text-align: center;
+            }
+        }
+    #offcanvas{
+        width:10%;
+         text-align: right;
+        button{
+            border:2px $colorMainText solid;
+            border-radius: 3px;
+            margin:8px 10px 3px 0;
+        }
+        .btn {
+            color:$colorMainText;
+            font-size: 1.3rem;
+        }
+        
+    }
+        
+}
+
+#home{
+    #navBar{
+        flex-wrap:wrap;
+        #nttLogo{
+            width:100%;
+        }
+        #logo{
+            flex-direction: column;
+            align-items: center;
+            width:100%;
+            .sublogo{
+                display:block;
+                width:100%;
+            }
+             .logo{
+                 width:100%;
+            }
+        }
+        #offcanvas{
+            width:100%;
+        }
+    }
+}
+
+#sideBar{
+    padding-right: 0;
+    margin-top:.3rem;
+    position: relative;
+    .offcanvas-collapse {
+        border-top:$colorMain 3px solid;
+        border-bottom:$colorMain 3px solid;
+        bottom: 0;
+        left: 0;
+        width: 97.5%;
+        padding: 0;
+        overflow-y: auto;
+        background-color: $colorSub;
+        visibility: hidden;
+        display:none;
+        opacity: 0.9;
+        
+        &.open {
+            visibility: visible;
+            display:block;
+            animation-name: fade-in;
+            animation-duration: .5s;
+        }
+   
+    }
+    ul{
+        
+        flex-direction: row;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        padding-left: 0;
+        margin-bottom: 0;
+        list-style: none;
+    }
+
+    li{
+        border-bottom:$colorGray solid 1px;
+        a{
+            color: rgba(0,0,0,1);
+            display: block;
+            padding: .6rem 0rem .6rem 1.5rem;
+            width: 100%;
+            &:hover{
+                color:$colorMainText;
+                background-color: $colorMain;
+                text-decoration: none;
+            }
+        }
+        
+        span{
+            margin-top:.6rem;
+            padding: .6rem;
+            display: block;
+        }
+        
+
+    }
+}
+#home #sideBar ul li a.home,
+.geometrical-illusion #sideBar ul li a.geometrical-illusion,
+.subjective-contour #sideBar ul li a.subjective-contour,
+.illusion-of-lightness #sideBar ul li a.illusion-of-lightness,
+.color-illusion #sideBar ul li a.color-illusion,
+.illusion-of-shape-and-form #sideBar ul li a.illusion-of-shape-and-form,
+.illusion-of-motion #sideBar ul li a.illusion-of-motion,
+.trompe-loeil #sideBar ul li a.trompe-loeil,
+.shading-and-shadow #sideBar ul li a.shading-and-shadow,
+.perception-completion #sideBar ul li a.perception-completion,
+.robustness-of-speech-perception #sideBar ul li a.robustness-of-speech-perception,
+.auditory-stream-segregation #sideBar ul li a.auditory-stream-segregation,
+.space-perception #sideBar ul li a.space-perception,
+.time-perception #sideBar ul li a.time-perception,
+.pitch #sideBar ul li a.pitch,
+.auditory-visual-integration #sideBar ul li a.auditory-visual-integration,
+
+
+{
+    color:$colorMainText;
+    background-color: $colorMain;
+}
+
+
+.contentsLink{
+     position: relative;
+    background-color: $colorSub;
+    .title{
+        font-weight: 700;
+        font-size:2rem;
+    }
+    .text{
+        border-top:$colorMain 5px solid;
+        border-bottom:$colorMain 5px solid;
+        background-color: #fff;
+        opacity:0.9;
+        padding:5px;
+        margin:5px 10px;
+    }
+}
+
+.divBtnLink{
+    a {
+        display: block;
+        position: absolute;
+        left: 0px;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        -webkit-opacity: 0;
+        -moz-opacity: 0;
+        opacity: 0;
+        -ms-filter: "alpha( opacity=0)";
+        filter: alpha(opacity=0);
+        z-index: 3;
+        background-color: #fff;
+        &:hover {
+            -webkit-opacity: 0.5;
+            -moz-opacity: 0.5;
+            opacity: 0.5;
+            -ms-filter: "alpha( opacity=50)";
+            filter: alpha(opacity=50);
+        }
+    }
+}
+
+
+.tab_content {
+    width: 100%;
+    margin:0 0 30px 0;
+    clear: left;
+    li:last-child{
+	    margin-bottom:30px;
+    }
+    &.display_none {
+      display: none;
+    }
+    ol{
+        margin:0 20px;
+    }
+}
+
+#home{
+    .iconCategory{
+        display: inline-block;
+        position: absolute;
+        right: 0;
+        top: 0;
+        margin:1rem;
+        z-index: 2;
+    }
+}
+
+
+#demoLinkBtnContainer{
+    line-height: 1.4rem;
+    font-size:1.3rem;
+    
+    
+    .demoLinkBtn{
+        position:relative;
+        background-color:$colorSub;
+
+        color:$colorSpiceText;
+        font-weight: 700;
+        border:$colorGray 1px solid;
+
+        p{
+            margin:5px 0;
+               &.image-area{
+        margin:0;
+        padding:0;
+        background-color: #fff;
+        
+    }
+        }
+     
+    }
+}
+
+#footprint{
+    margin:.5rem 1rem;
+    a{
+        color:$colorSpiceText;
+        text-decoration: underline;
+    }
+
+}
+
+#footer{
+    background-color: $colorMain !important;
+    color:$colorMainText;
+     a{
+        color:$colorMainText;
+    }
+    #footerLink{
+        a{
+            color:$colorMainText;
+            font-weight: 700;
+            &:hover{
+            text-decoration: none;
+               color:$colorSpiceText;
+
+            }
+        }
+        i{
+            color: $colorMain;
+            background-color:$colorMainText;
+            border-radius: 3px;
+            margin:0 3px 0 0;
+            padding:1px 5px;
+        }
+    
+    }
+}
+
+#about #footer #footerLink a#linkAbout,
+#aboutVisual #footer #footerLink a#linkAboutVisual,
+#aboutAuditory #footer #footerLink a#linkAboutAuditory,
+#list #footer #footerLink a#linkList,
+#contact #footer #footerLink a#linkContact,
+#help #footer #footerLink a#linkHelp{
+                text-decoration: none;
+                 color:$colorSpiceText;
+}
+
+#list{
+    .illusionList{
+        color:#ccc;
+        a{
+          @extend %a;
+            
+        }
+    }
+}
+
+
+#page a.link-btn{
+    color:$colorMainText;
+    background-color: $colorSpiceText;
+    padding:8px 10px;
+    font-weight: 700;
+    margin:0.5rem 0;
+    border-radius: 3px;
+    text-align: center;
+    text-decoration: none;
+    &:hover{
+        background-color: $colorMain;
+        text-decoration: none;
+    }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0.8;
+  }
+}
+
+//560px以上 1020px以下
+@include sm {
+    .container{
+        padding-left: 0px;
+   
+    }
+    #navBar{
+        flex-wrap:nowrap;
+        #nttLogo{
+            width:20%;
+        }
+        #offcanvas{
+        width:10%;
+          .btn {
+                font-size:2rem;
+            }
+        }
+    }
+
+    h1{
+        font-size:2.1rem;
+    }
+};
+
+@include md {
+    h1{
+        font-size:2.3rem;
+    }
+};
+
+//1020px以上
+@include lg {
+    #navBar{
+        #offcanvas {
+            display: none;
+        }
+        #logo{ 
+            .sublogo{
+                display: block;
+                width:25%;
+             &.left{
+                        text-align:right;
+                    }
+                    &.right{
+                        text-align:left;
+                    }
+            }
+            .logo{
+                width:30%;
+            }
+        }    
+    }
+    
+    #home{
+        #navBar{
+            justify-content: center;
+            #logo{
+                flex-direction: row;
+                align-items:  flex-end;
+               
+                .sublogo{
+                     width:30%;
+                   
+                }
+                .logo{
+                    width:40%;
+                }
+            }
+        }
+    }
+
+    #sideBar{
+        .offcanvas-collapse {
+            display:block;
+            visibility:visible;
+        }
+    }
+        h1{
+        font-size:2.6rem;
+    }
+};
+

@@ -1,0 +1,46 @@
+@charset "utf-8";
+@import "_variables.scss";
+
+.number{
+    background-color: $colorMain;
+    color:$colorMainText;
+    padding:3px 8px;
+    font-weight: 700;
+    margin:0 .8rem 0 0;
+    border-radius: 3px;
+}
+
+
+
+.audioContainer{
+    text-align: center;
+}
+
+audio, video {
+    display: inline-block;
+}
+audio {
+    width: 300px;
+    height: 54px;
+}     
+.auido-area {
+
+    width: 100%;
+}
+.card-img{
+       background-color:$colorMain;
+    color:$colorMainText; 
+}
+
+.imageBox{
+    text-align: center;
+}
+
+#demo-explain-link{
+    display: block;
+    padding:2px 5px;
+    &:hover{
+        opacity: 0.5;
+        border: none;
+    }
+}

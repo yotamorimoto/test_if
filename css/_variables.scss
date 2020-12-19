@@ -1,0 +1,44 @@
+
+$colorMain: #6dd1d2;
+$colorMainText: #fff;
+$colorSub: #f6f5ec;
+$colorGray: #ddd;
+$colorVisual:#ff7bac;
+$colorAuditory:#f7931e;
+$colorSpiceText:#004d4d;
+$colorLink:#005ba9;
+$colorLinkHover:#5fa1d9;
+
+
+
+/* Scss Document */
+$xl: 1190px; // PC
+$lg: 960px; // PC
+$md: 768px; // タブレット
+$sm: 576px;
+
+@mixin sm {
+  @media (min-width: ($sm)) {
+    @content;
+  }
+}
+
+@mixin md {
+  @media (min-width: ($md)) {
+    @content;
+  }
+}
+
+@mixin lg {
+  @media (min-width: ($lg)) {
+    @content;
+  }
+}
+
+@mixin xl {
+  @media (min-width: ($xl)) {
+    @content;
+  }
+}
+
+
