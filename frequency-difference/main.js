@@ -18,7 +18,7 @@ const wrapper = document.getElementById('wrapper')
 const canvas = document.getElementById('canvas')
 const semitone = document.getElementById('hsemitone')
 const slider = new Nexus.Slider('#slider', {
-  'size': [30,310],
+  'size': [30,200],
   'mode':'absolute',
   'min': 1,
   'max': 10,
@@ -28,7 +28,7 @@ const slider = new Nexus.Slider('#slider', {
 slider.on('change', (v) => {
   v = v - 1
   addnote = [0,1,2,3,5,7,11,14,17,23][v]
-  semitone.innerHTML = `${addnote+1}半音`
+  semitone.innerHTML = `周波数差：${addnote+1}半音`
   draw()
 })
 const volume = new Nexus.Slider('#volume', {
@@ -169,30 +169,30 @@ function resize() {
     // wrapper.style.height = '525px'
     canvas.style.width = '600px'
     canvas.style.height = '350px'
-    slider.resize(30,310)
+    slider.resize(30,270)
   } else if (w < 1190 && w >= 960) {
     wrapper.style.width = '795px'
     // wrapper.style.height = '422px'
     canvas.style.width = '500px'
     canvas.style.height = '250px'
-    slider.resize(30,230)
+    slider.resize(30,180)
   } else if (w < 960 && w >= 768) {
     wrapper.style.width = '720px'
     // wrapper.style.height = '400px'
     canvas.style.width = '500px'
     canvas.style.height = '235px'
-    slider.resize(30,210)
+    slider.resize(30,150)
   } else if (w < 768 && w >= 576) {
     wrapper.style.width = '540px'
     // wrapper.style.height = '300px'
     canvas.style.width = '350px'
     canvas.style.height = '155px'
     vlabel.style.padding = '50px 0'
-    slider.resize(30,150)
+    slider.resize(30,100)
   } else {
     wrapper.style.width = '350px'
     // wrapper.style.height = '300px'
-    canvas.style.width = '200px'
+    canvas.style.width = '150px'
     canvas.style.height = '155px'
     vlabel.style.padding = '50px 0'
     slider.resize(30,100)

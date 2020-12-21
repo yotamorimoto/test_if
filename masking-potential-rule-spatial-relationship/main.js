@@ -27,7 +27,7 @@ slider.on('change', (v) => {
   spectrogram.src = v + '.png'
 })
 const number = new Nexus.Number('#number', {
-  'size': [30,30]
+  'size': [35,30]
 })
 const volume = new Nexus.Slider('#volume', {
   'size': [150,20],

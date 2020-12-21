@@ -22,6 +22,11 @@ const slider = new Nexus.Slider('#slider', {
   'step': 1,
   'value': 0,
 })
+slider.on('change', (v) => {
+  sliderValue = [0, 0.05, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.9][v]
+  freqValue = [400,405,410,415,420,425,430,435,440,445][v]
+  draw()
+})
 const volume = new Nexus.Slider('#volume', {
   'size': [150,20],
   'mode':'absolute',
@@ -33,25 +38,26 @@ const volume = new Nexus.Slider('#volume', {
 volume.on('change', (v) => {
   master.gain.value = v
 })
-let processor, dummy
+let processor, dummy, freqValue = 400
 let isPlaying = true
 let tick = 0.5
 let sliderValue = 0
 
 const onaudioprocess = () => {
   if (tick - audio.currentTime < (blockSize / audio.sampleRate)) {
-    let f = midicps(44)
-    let amp = 1/7
+    let f = 100
+    let amp = 1/8
     let atk = 0.01
     let sus = 0.5
     let rls = 0.01
     Sine(f, amp, atk, sus, rls)
     Sine(f*2, amp, atk, sus, rls)
-    Sine(f*(3+sliderValue), amp, atk, sus, rls)
-    Sine(f*4, amp, atk, sus, rls)
+    Sine(f*3, amp, atk, sus, rls)
+    Sine(freqValue, amp, atk, sus, rls)
     Sine(f*5, amp, atk, sus, rls)
     Sine(f*6, amp, atk, sus, rls)
     Sine(f*7, amp, atk, sus, rls)
+    Sine(f*8, amp, atk, sus, rls)
     tick += interval
   }
 }
@@ -65,10 +71,7 @@ function init() {
   dummy.connect(processor)
   processor.connect(master)
   master.connect(audio.destination)
-  slider.on('change', (v) => {
-    sliderValue = [0, 0.05, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.9][v]
-    draw()
-  })
+  slider.value
 }
 function draw() {
   let x = canvas.getContext('2d')
@@ -126,11 +129,13 @@ stopButton.onclick = () => {
   if (isPlaying) {
     master.disconnect()
     isPlaying = false
+    stopButton.innerHTML = 'start'
   } else {
     tick = 0.5
     init()
     master.connect(audio.destination)
     isPlaying = true
+    stopButton.innerHTML = 'stop'
   }
 }
 function resize() {

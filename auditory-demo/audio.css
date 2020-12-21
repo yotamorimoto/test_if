@@ -29,13 +29,14 @@
 #play a.playBtn:hover {
   background-color: #2bb;
 }
-#stop {display:block;margin:0}
+#stop {display:block;margin:3px auto;}
 #slider {display:block;margin:15px auto}
 #wrapper {
   overflow:hidden;
   position:static;
   z-index:0;
   top:0;right:0;bottom:0;left:0;
+  padding:3px;
   float:left;
 }
 #vlabel {
@@ -48,8 +49,10 @@
   border: 1px solid grey;
   color:#2bb;
   font-size:15px;
-  padding:0px 0;
+  padding:0;
+  margin-right:5px;
   display:inline;
+  float:right;
 }
 #hlabel {
   text-align:center;
