@@ -13,7 +13,7 @@ body {
   background-color: #C4C5C7; }
 
 a, #list .illusionList a {
-  color: #005ba9; }
+  color: #1e2cd8; }
   a:hover, #list .illusionList a:hover {
     color: #5fa1d9;
     text-decoration: underline; }
@@ -24,15 +24,20 @@ a, #list .illusionList a {
 #page {
   width: 100vw;
   height: 100vh;
+  padding-left: 0;
+  padding-right: 0;
   background-image: -webkit-linear-gradient(#EBEBEB 0%, #DCDDDF 48%, #C4C5C7 99%);
   background-image: -o-linear-gradient(#EBEBEB 0%, #DCDDDF 48%, #C4C5C7 99%);
   background-image: linear-gradient(#EBEBEB 0%, #DCDDDF 48%, #C4C5C7 99%); }
 
+header {
+  background-color: #6dd1d2 !important; }
+
 .container {
-  padding-left: 0;
-  padding-right: 0;
+  padding-left: 0px;
+  padding-right: 15px;
   background-color: #fff;
-  min-width: 320px;
+  min-width: 351px;
   box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.3); }
 
 main[role="main"] {
@@ -150,7 +155,7 @@ h2 {
 h3 {
   font-size: 1.7rem;
   margin: 1.5rem 0;
-  padding: 0;
+  padding: 0 0 0 10px;
   border-bottom: 1px dotted #6dd1d2; }
 
 h4 {
@@ -168,7 +173,7 @@ h4 {
     width: 20%; }
   #navBar #logo {
     margin: 10px 0;
-    width: 70%;
+    width: 65%;
     display: flex;
     flex-direction: row;
     align-items: flex-end;
@@ -190,12 +195,12 @@ h4 {
       margin: 0;
       text-align: center; }
   #navBar #offcanvas {
-    width: 10%;
+    width: 15%;
     text-align: right; }
     #navBar #offcanvas button {
       border: 2px #fff solid;
       border-radius: 3px;
-      margin: 8px 10px 3px 0; }
+      margin: 8px 40px 3px 0; }
     #navBar #offcanvas .btn {
       color: #fff;
       font-size: 1.3rem; }
@@ -212,7 +217,7 @@ h4 {
       display: block;
       width: 100%; }
     #home #navBar #logo .logo {
-      width: 100%; }
+      width: 90%; }
   #home #navBar #offcanvas {
     width: 100%; }
 
@@ -385,7 +390,11 @@ h4 {
   color: #004d4d; }
 
 #list .illusionList {
+  text-align: justify;
+  line-height: 2.2;
   color: #ccc; }
+  #list .illusionList a {
+    display: inline-block; }
 
 #page a.link-btn {
   color: #fff;
@@ -406,9 +415,6 @@ h4 {
   100% {
     opacity: 0.8; } }
 @media (min-width: 576px) {
-  .container {
-    padding-left: 0px; }
-
   #navBar {
     flex-wrap: nowrap; }
     #navBar #nttLogo {
@@ -421,6 +427,10 @@ h4 {
   h1 {
     font-size: 2.1rem; } }
 @media (min-width: 768px) {
+  .container {
+    padding-left: 0px;
+    padding-right: 0px; }
+
   h1 {
     font-size: 2.3rem; } }
 @media (min-width: 960px) {

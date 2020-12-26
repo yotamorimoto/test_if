@@ -93,23 +93,23 @@ function resize() {
   let w = window.innerWidth
   if (w >= 1190) {
     wrapper.style.width = '945px'
-    spectrogram.width = '700'
-    slider.resize(30,310)
+    spectrogram.width = '600'
+    slider.resize(30,270)
   } else if (w < 1190 && w >= 960) {
     wrapper.style.width = '795px'
     spectrogram.width = '600'
-    slider.resize(30,250)
+    slider.resize(30,180)
   } else if (w < 960 && w >= 768) {
     wrapper.style.width = '720px'
-    spectrogram.width = '550'
-    slider.resize(30,230)
+    spectrogram.width = '500'
+    slider.resize(30,150)
   } else if (w < 768 && w >= 576) {
     wrapper.style.width = '540px'
     spectrogram.width = '400'
-    slider.resize(30,150)
+    slider.resize(30,100)
   } else {
     wrapper.style.width = '350px'
-    spectrogram.width = '300'
+    spectrogram.width = '280'
     slider.resize(30,100)
   }
 }

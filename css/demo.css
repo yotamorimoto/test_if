@@ -39,9 +39,13 @@ audio {
   text-align: left;
   padding: 0.2rem;
   border: 1px #ccc solid;
-  margin: 5px 20px 5px 0px;
+  margin: 5px;
   border-radius: 5px;
-  width: 99%;
+  width: 95%;
   clear: both; }
   .demo-caption p {
     margin: 5px 5px; }
+
+@media (min-width: 576px) {
+  .demo-caption {
+    width: 99%; } }

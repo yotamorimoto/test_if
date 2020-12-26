@@ -129,7 +129,7 @@
                     <!-- InstanceBeginEditable name="auditory-slider" -->
                     <!-- ここから -->
                     <div id='wrapper' class='frame'>
-                      <button id='play'>play</button>
+                      <button id='play'><a class='playBtn'><i class='far fa-hand-point-up'></i>デモをためす</a></button>
                       <div class='test' style='text-align:center;margin:0px auto'>
                         <span id='vlabel'>周波数</span>
                         <canvas id='canvas' class='test'></canvas>
@@ -137,6 +137,7 @@
                         <div style='display:inline-block;float:right'>
                           <button id='stop'>stop</button>
                           <span id='slider'></span>
+                          <span id='number'></span>
                         </div>
                         <div id='hlabel'>繰り返し単位の経過時間</div>
                       </div>
@@ -146,6 +147,9 @@
                       </div>
                     </div>
                     <script type='module' src='main.js'></script>
+                    <div class="demo-caption"><p>「<i class="far fa-hand-point-up"></i> デモをためす」をクリックもしくはタップするとデモが始まり、2種類の高さの音だけからなる単純なメロディーが流れてきます。馬の駆け足のような一つのメロディーに聞こえたり、木魚のように一定のリズムを刻む高低ふたつの流れに分かれて聞こえたりします。スライダーの値を変化させると、どちらの聞こえ方になるでしょうか。デモの音を止めるにはスライダーの上にある「Stop」ボタンを押してください。同じ場所に表示される「Start」ボタンを押すと、ふたたび音が流れます。
+                        </p>
+                    </div>
                     <!-- ここまで -->
                     <!-- InstanceEndEditable -->
 
@@ -158,17 +162,14 @@
                  <!--demo area -->
 
                  <!--description area -->
-                <div class="col-12 mt-5">
+                <div class="col-12 mt-3">
                 <h2 class="demo-title" id="demo-explain">説明</h2>
                   <div class="textBox">
                       <!-- InstanceBeginEditable name="demo_description" -->
-                        <h2></h2>
-                        <p></p>
+                  <p>スライダーの値が大きくなるほど、高い音と低い音の時間差が大きく（つまりテンポが遅く）なります。時間差が大きいときは、ひとつのメロディー（馬の駆け足）に聞こえやすく、時間差が小さくなると、ふたつの流れに分かれやすくなります。</p>
 
-                      <h3>参考文献</h3>
-                         <ul class="articles">
-                           <li></li>
-                             </ul>
+                        <p> 脳は「ひとつの音源であれば、短時間内に周波数成分が大きく変化する可能性は低い」という暗黙の前提を用いて複数音源の解釈を行っていると「周波数差」のデモの説明で述べましたが、裏を返せば、「時間がかかれば周波数が跳躍してもおかしくない」ということでもあります。</p>
+
                     <!-- InstanceEndEditable -->
                     <hr>
                     <p class="mr-2 text-right"><a href="#page"><i class="fas fa-angle-double-up"></i> Back to top</a></p>

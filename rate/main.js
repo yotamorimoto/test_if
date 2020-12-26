@@ -8,7 +8,7 @@ window.hpf = null
 document.addEventListener('DOMContentLoaded', resize)
 window.addEventListener('resize', resize)
 
-const blockSize = 512
+const blockSize = 256
 const playButton = document.getElementById('play')
 const stopButton = document.getElementById('stop')
 const wrapper = document.getElementById('wrapper')
@@ -18,18 +18,21 @@ const hlabel = document.getElementById('hlabel')
 const slider = new Nexus.Slider('#slider', {
   'size': [30,310],
   'mode':'absolute',
-  'min': 0,
-  'max': 9,
+  'min': 1,
+  'max': 10,
   'step': 1,
   'value': 0,
 })
 slider.on('change', (v) => {
-  interval = [0.25,0.2,0.18,0.15,0.12,0.1,0.075,0.05,0.04,0.03][9-v]
-  sustain = [0.2,0.15,0.09,0.08,0.07,0.07,0.05,0.04,0.03,0.019][9-v]
-  release = [0.01,0.01,0.01,0.01,0.005,0.005,0.005,0.005,0.001,0.001][9-v]
-  linediv = [5,7,10,15,20,25,30,40,50,60][9-v]
+  interval = [0.25,0.2,0.18,0.15,0.12,0.1,0.075,0.05,0.04,0.03][9-v+1]
+  sustain = [0.2,0.15,0.09,0.08,0.07,0.07,0.05,0.04,0.03,0.019][9-v+1]
+  release = [0.01,0.01,0.01,0.01,0.005,0.005,0.005,0.005,0.001,0.001][9-v+1]
+  linediv = [5,7,10,15,20,25,30,40,50,60][9-v+1]
   hlabel.innerHTML = `繰り返し単位の経過時間（点線区間：${ interval*4 }秒）`
   draw()
+})
+const number = new Nexus.Number('#number', {
+  'size': [35,30]
 })
 const volume = new Nexus.Slider('#volume', {
   'size': [150,20],
@@ -74,6 +77,7 @@ function init() {
   hpf.frequency.value = 300
   master.connect(hpf)
   hpf.connect(audio.destination)
+  number.link(slider)
 }
 function draw() {
   let x = canvas.getContext('2d')
@@ -159,26 +163,26 @@ function resize() {
     // wrapper.style.height = '525px'
     canvas.style.width = '600px'
     canvas.style.height = '350px'
-    slider.resize(30,310)
+    slider.resize(30,270)
   } else if (w < 1190 && w >= 960) {
     wrapper.style.width = '795px'
     // wrapper.style.height = '422px'
     canvas.style.width = '500px'
     canvas.style.height = '250px'
-    slider.resize(30,230)
+    slider.resize(30,180)
   } else if (w < 960 && w >= 768) {
     wrapper.style.width = '720px'
     // wrapper.style.height = '400px'
     canvas.style.width = '500px'
     canvas.style.height = '235px'
-    slider.resize(30,210)
+    slider.resize(30,150)
   } else if (w < 768 && w >= 576) {
     wrapper.style.width = '540px'
     // wrapper.style.height = '300px'
     canvas.style.width = '350px'
     canvas.style.height = '155px'
     vlabel.style.padding = '50px 0'
-    slider.resize(30,150)
+    slider.resize(30,100)
   } else {
     wrapper.style.width = '350px'
     // wrapper.style.height = '300px'

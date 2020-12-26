@@ -128,8 +128,8 @@
 
                     <!-- InstanceBeginEditable name="auditory-slider" -->
                     <!-- ここから -->
-                    <div id='wrapper' class='frame'>
-                      <button id='play'>play</button>
+                   <div id='wrapper' class='frame'>
+                       <button id='play'><a class='playBtn'><i class='far fa-hand-point-up'></i> デモをためす</a></button>
                       <div class='test' style='text-align:center;margin:0px auto'>
                         <span id='vlabel'>周波数</span>
                         <canvas id='canvas' class='test'></canvas>
@@ -147,6 +147,9 @@
                       </div>
                     </div>
                     <script type='module' src='main.js'></script>
+                    <div class="demo-caption"><p>「<i class="far fa-hand-point-up"></i> デモをためす」をクリックもしくはタップするとデモが始まり、2種類の高さの音だけからなる単純なメロディーが流れてきます。馬の駆け足のような一つのメロディーに聞こえたり、木魚のように一定のリズムを刻む高低ふたつの流れに分かれて聞こえたりします。スライダーの値を変化させると、どちらの聞こえ方になるでしょうか。デモの音を止めるにはスライダーの上にある「Stop」ボタンを押してください。同じ場所に表示される「Start」ボタンを押すと、ふたたび音が流れます。
+                        </p>
+                    </div>
                     <!-- ここまで -->
                     <!-- InstanceEndEditable -->
 
@@ -159,16 +162,18 @@
                  <!--demo area -->
 
                  <!--description area -->
-                <div class="col-12 mt-5">
+                <div class="col-12 mt-3">
                 <h2 class="demo-title" id="demo-explain">説明</h2>
                   <div class="textBox">
                       <!-- InstanceBeginEditable name="demo_description" -->
-                        <h2></h2>
-                        <p></p>
+                        <p>スライダーの値が大きくなるほど、高い音と低い音の周波数差が大きくなります。周波数差が小さいときは、ひとつのメロディー（馬の駆け足）に聞こえやすく、周波数差が大きくなると、ふたつの流れに分かれやすくなります。このように、音がいくつかのまとまりに分かれて聞こえることを「音脈分凝」と呼びます。</p>
 
+                        <p>日常生活では、さまざまな音が入り交じった環境の中で、それぞれの音を聞き分けなければなりません。その際、脳は、「ひとつの音源であれば、短時間内に周波数成分が大きく変化する可能性は低い」という暗黙の前提を用いているのです。<br>
+                        （『音のイリュージョン』p.39-40）
+                        </p>
                       <h3>参考文献</h3>
                          <ul class="articles">
-                           <li></li>
+    <li>「<a href="http://www.iwanami.co.jp/moreinfo/0295680/top.html" target="_blank">音のイリュージョン ― 知覚を生み出す脳の戦略 ―</a>」　柏野牧夫著　岩波書店　2010年</li>
                              </ul>
                     <!-- InstanceEndEditable -->
                     <hr>

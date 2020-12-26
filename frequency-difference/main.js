@@ -10,7 +10,7 @@ window.hpf = null
 document.addEventListener('DOMContentLoaded', resize)
 window.addEventListener('resize', resize)
 
-const blockSize = 1024
+const blockSize = 512
 const interval = 0.12
 const playButton = document.getElementById('play')
 const stopButton = document.getElementById('stop')
@@ -53,7 +53,7 @@ const onaudioprocess = () => {
     const note = seq[counter%4]
     const amp = 1/2
     const atk = 0.01
-    const sus = 0.08
+    const sus = 0.1
     const rls = 0.01
     if (note == seq[0]) {
       const f = midicps(note)

@@ -44,3 +44,27 @@ audio {
         border: none;
     }
 }
+
+.demo-caption{
+    color: #000; 
+    text-align: left;
+    padding:0.2rem;
+    border:1px #ccc solid;
+    margin:5px;
+    border-radius: 5px;
+    width: 95%;
+    clear: both;
+    p{
+        margin:5px 5px;
+    }
+}
+
+//560px以上 1020px以下
+@include sm {
+    .demo-caption{
+    width: 99%;
+
+
+}
+
+}

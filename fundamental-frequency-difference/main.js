@@ -10,7 +10,7 @@ window.hpf = null
 document.addEventListener('DOMContentLoaded', resize)
 window.addEventListener('resize', resize)
 
-const blockSize = 1024
+const blockSize = 512
 const interval = 0.12
 const playButton = document.getElementById('play')
 const stopButton = document.getElementById('stop')
@@ -29,6 +29,9 @@ slider.on('change', (v) => {
   v = v - 1
   sliderValue = v
   draw()
+})
+const number = new Nexus.Number('#number', {
+  'size': [35,30]
 })
 const volume = new Nexus.Slider('#volume', {
   'size': [150,20],
@@ -52,9 +55,9 @@ const onaudioprocess = () => {
   if (tick - audio.currentTime < (blockSize / audio.sampleRate)) {
     const note = seq[counter%4]
     const amp = 1/25
-    const atk = 0.007
-    const sus = 0.11
-    const rls = 0.007
+    const atk = 0.01
+    const sus = 0.1
+    const rls = 0.01
     if (note == 45) {
       const f = midicps(note)
       for (let i=3; i<18; i++) Sine(f*i, amp, atk, sus, rls)
@@ -81,6 +84,7 @@ function init() {
   hpf.frequency.value = 2000
   master.connect(hpf)
   hpf.connect(audio.destination)
+  number.link(slider)
   // WebAudio highpass butterworth design
   // Order = 6
   // Sample rate = 48000 Hz
@@ -179,26 +183,26 @@ function resize() {
     // wrapper.style.height = '525px'
     canvas.style.width = '600px'
     canvas.style.height = '350px'
-    slider.resize(30,310)
+    slider.resize(30,270)
   } else if (w < 1190 && w >= 960) {
     wrapper.style.width = '795px'
     // wrapper.style.height = '422px'
     canvas.style.width = '500px'
     canvas.style.height = '250px'
-    slider.resize(30,230)
+    slider.resize(30,180)
   } else if (w < 960 && w >= 768) {
     wrapper.style.width = '720px'
     // wrapper.style.height = '400px'
     canvas.style.width = '500px'
     canvas.style.height = '235px'
-    slider.resize(30,210)
+    slider.resize(30,150)
   } else if (w < 768 && w >= 576) {
     wrapper.style.width = '540px'
     // wrapper.style.height = '300px'
     canvas.style.width = '350px'
     canvas.style.height = '155px'
     vlabel.style.padding = '50px 0'
-    slider.resize(30,150)
+    slider.resize(30,100)
   } else {
     wrapper.style.width = '350px'
     // wrapper.style.height = '300px'

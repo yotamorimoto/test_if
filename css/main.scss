@@ -33,19 +33,22 @@ a {
 #page {
   width: 100vw;
   height: 100vh;
-
+  padding-left: 0;
+  padding-right: 0;
   background-image: -webkit-linear-gradient(#EBEBEB 0%, #DCDDDF 48%, #C4C5C7 99%);
   background-image: -o-linear-gradient(#EBEBEB 0%, #DCDDDF 48%, #C4C5C7 99%);
   background-image: linear-gradient(#EBEBEB 0%, #DCDDDF 48%, #C4C5C7 99%);
 }
-
+header{
+  background-color: $colorMain !important;   
+}
 
 .container{
-    padding-left: 0;
-    padding-right: 0;
+    padding-left:0px;
+    padding-right:15px;
 
     background-color: #fff;
-    min-width: 320px;
+    min-width: 351px;
     box-shadow: 0 10px 10px 0 rgba(0, 0, 0, .3);
 
 }
@@ -218,7 +221,7 @@ h2{
 h3{
 	font-size: 1.7rem;
     margin:1.5rem 0;
-    padding:0;
+    padding:0 0 0 10px;
     border-bottom:1px dotted $colorMain;
 }
 
@@ -242,7 +245,7 @@ h4{
         }
         #logo{
             margin:10px 0;
-            width:70%;
+            width:65%;
             display:flex;
             flex-direction: row;
             align-items:  flex-end;
@@ -269,12 +272,12 @@ h4{
             }
         }
     #offcanvas{
-        width:10%;
-         text-align: right;
+        width:15%;
+        text-align: right;
         button{
             border:2px $colorMainText solid;
             border-radius: 3px;
-            margin:8px 10px 3px 0;
+            margin:8px 40px 3px 0;
         }
         .btn {
             color:$colorMainText;
@@ -300,7 +303,7 @@ h4{
                 width:100%;
             }
              .logo{
-                 width:100%;
+                 width:90%;
             }
         }
         #offcanvas{
@@ -537,10 +540,13 @@ h4{
 
 #list{
     .illusionList{
+         text-align:justify;
+        line-height: 2.2;
         color:#ccc;
         a{
           @extend %a;
             
+            display: inline-block;
         }
     }
 }
@@ -572,10 +578,7 @@ h4{
 
 //560px以上 1020px以下
 @include sm {
-    .container{
-        padding-left: 0px;
-   
-    }
+    
     #navBar{
         flex-wrap:nowrap;
         #nttLogo{
@@ -595,6 +598,11 @@ h4{
 };
 
 @include md {
+    .container{
+        padding-left: 0px;
+          padding-right: 0px;
+   
+    }
     h1{
         font-size:2.3rem;
     }

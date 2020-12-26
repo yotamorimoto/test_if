@@ -3,9 +3,9 @@
 #play {
   position:absolute;
   z-index:3;
-  width:inherit; height:inherit;
+  width:100%; height:100%;/*☆*/
   padding:0;
-  font-size:10vw;
+  /*font-size:10vw;*//*☆*/
   text-align:center;
   letter-spacing: -2px;
   color: #2bb;
@@ -13,7 +13,7 @@
   border:none;
 }
 #play:hover {
-  background-color:rgba(255,255,255,0.7);
+  background-color:rgba(255,255,255,0.6);/*☆*/
 }
 #play a.playBtn {
   text-decoration: none;
@@ -33,11 +33,13 @@
 #slider {display:block;margin:15px auto}
 #wrapper {
   overflow:hidden;
-  position:static;
+  position:relative;/*☆*/
   z-index:0;
-  top:0;right:0;bottom:0;left:0;
-  padding:3px;
-  float:left;
+  /*top:0;right:0;bottom:0;left:0;
+  float:left;*/
+    margin-left: auto;/*☆*/
+    margin-right: auto;/*☆*/
+     padding:3px;
 }
 #vlabel {
   padding:100px 0;
@@ -49,10 +51,10 @@
   border: 1px solid grey;
   color:#2bb;
   font-size:15px;
-  padding:0;
+   padding:0;
   margin-right:5px;
   display:inline;
-  float:right;
+float:right;
 }
 #hlabel {
   text-align:center;

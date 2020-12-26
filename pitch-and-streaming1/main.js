@@ -17,15 +17,18 @@ const vlabel = document.getElementById('vlabel')
 const slider = new Nexus.Slider('#slider', {
   'size': [30,310],
   'mode':'absolute',
-  'min': 0,
-  'max': 9,
+  'min': 1,
+  'max': 10,
   'step': 1,
   'value': 0,
 })
 slider.on('change', (v) => {
-  sliderValue = [0, 0.05, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.9][v]
-  freqValue = [400,405,410,415,420,425,430,435,440,445][v]
+  sliderValue = [0, 0.05, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.9][v-1]
+  freqValue = [400,405,410,415,420,425,430,435,440,445][v-1]
   draw()
+})
+const number = new Nexus.Number('#number', {
+  'size': [35,30]
 })
 const volume = new Nexus.Slider('#volume', {
   'size': [150,20],
@@ -72,6 +75,7 @@ function init() {
   processor.connect(master)
   master.connect(audio.destination)
   slider.value
+  number.link(slider)
 }
 function draw() {
   let x = canvas.getContext('2d')
@@ -145,26 +149,26 @@ function resize() {
     // wrapper.style.height = '525px'
     canvas.style.width = '600px'
     canvas.style.height = '350px'
-    slider.resize(30,310)
+    slider.resize(30,270)
   } else if (w < 1190 && w >= 960) {
     wrapper.style.width = '795px'
     // wrapper.style.height = '422px'
     canvas.style.width = '500px'
     canvas.style.height = '250px'
-    slider.resize(30,230)
+    slider.resize(30,180)
   } else if (w < 960 && w >= 768) {
     wrapper.style.width = '720px'
     // wrapper.style.height = '400px'
     canvas.style.width = '500px'
     canvas.style.height = '235px'
-    slider.resize(30,210)
+    slider.resize(30,150)
   } else if (w < 768 && w >= 576) {
     wrapper.style.width = '540px'
     // wrapper.style.height = '300px'
     canvas.style.width = '350px'
     canvas.style.height = '155px'
     vlabel.style.padding = '50px 0'
-    slider.resize(30,150)
+    slider.resize(30,100)
   } else {
     wrapper.style.width = '350px'
     // wrapper.style.height = '300px'
