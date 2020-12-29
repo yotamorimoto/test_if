@@ -66,7 +66,7 @@ const onaudioprocess = () => {
   }
 }
 function init() {
-  audio = new AudioContext({ latencyHint: blockSize/48000 })
+  audio = new AudioContext({ latencyHint: blockSize/44100 })
   processor = audio.createScriptProcessor(blockSize)
   processor.onaudioprocess = onaudioprocess
   master = audio.createGain()
