@@ -47,7 +47,7 @@ volume.on('change', (v) => {
 })
 let interval = 0.25
 let sustain, release, linediv
-let processor
+let processor, dummy
 let isPlaying = true
 let sliderValue = 0
 let tick = 1
@@ -74,6 +74,9 @@ function init() {
   processor.onaudioprocess = onaudioprocess
   master = audio.createGain()
   master.gain.value = volume.value
+  dummy = audio.createOscillator()
+  dummy.frequency.value = 0
+  dummy.connect(processor)
   processor.connect(master)
   hpf = audio.createBiquadFilter()
   hpf.type = 'highpass'
