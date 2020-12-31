@@ -1,14 +1,14 @@
-import { midicps } from '../auditory-demo/sc.js'
-import { Sine } from '../auditory-demo/synth.js'
+import { midicps, load2buf } from '../auditory-demo/sc.js'
+import { Player } from '../auditory-demo/synth.js'
 
 window.AudioContext = window.AudioContext || window.webkitAudioContext
 window.audio = null
 window.master = null
-window.hpf = null
+// window.hpf = null
 document.addEventListener('DOMContentLoaded', resize)
 window.addEventListener('resize', resize)
 
-const blockSize = 256
+const blockSize = 1024
 const playButton = document.getElementById('play')
 const stopButton = document.getElementById('stop')
 const wrapper = document.getElementById('wrapper')
@@ -21,9 +21,13 @@ const slider = new Nexus.Slider('#slider', {
   'min': 1,
   'max': 10,
   'step': 1,
-  'value': 0,
+  'value': 1,
 })
 slider.on('change', (v) => {
+  players[v-1].setAmp(1, 0.3)
+  for (const [i, player] of players.entries()) {
+    if (!(i == (v-1))) player.setAmp(0, 0.3)
+  }
   interval = [0.25,0.2,0.18,0.15,0.12,0.1,0.075,0.06,0.05,0.04][9-v+1]
   sustain = [0.2,0.15,0.09,0.08,0.07,0.07,0.05,0.04,0.03,0.015][9-v+1]
   release = [0.01,0.01,0.01,0.01,0.005,0.005,0.005,0.005,0.001,0.001][9-v+1]
@@ -53,37 +57,43 @@ let sliderValue = 0
 let tick = 1
 let counter = 0
 let seq = [80, 81, 80, -1]
+let players = new Array(10)
 
-const onaudioprocess = () => {
-  if (tick - audio.currentTime < (blockSize / audio.sampleRate)) {
-    const note = seq[counter%4]
-    if (note > 0) {
-      const amp = 1/5
-      Sine(midicps(note), amp, release, sustain, release)
-    }
-    tick += interval
-    counter++
-  }
-}
+
+// const onaudioprocess = () => {
+//   if (tick - audio.currentTime < (blockSize / audio.sampleRate)) {
+//     const note = seq[counter%4]
+//     if (note > 0) {
+//       const amp = 1/5
+//       Sine(midicps(note), amp, release, sustain, release)
+//     }
+//     tick += interval
+//     counter++
+//   }
+// }
 function init() {
   audio = new AudioContext({
-    sampleRate: 44100,
-    latencyHint: blockSize/44100
+    sampleRate: 48000,
+    latencyHint: blockSize/48000
   })
-  processor = audio.createScriptProcessor(blockSize)
-  processor.onaudioprocess = onaudioprocess
   master = audio.createGain()
   master.gain.value = volume.value
-  dummy = audio.createOscillator()
-  dummy.frequency.value = 0
-  dummy.connect(processor)
-  processor.connect(master)
-  hpf = audio.createBiquadFilter()
-  hpf.type = 'highpass'
-  hpf.frequency.value = 300
-  master.connect(hpf)
-  hpf.connect(audio.destination)
-  number.link(slider)
+  master.connect(audio.destination)
+
+  // processor = audio.createScriptProcessor(blockSize)
+  // processor.onaudioprocess = onaudioprocess
+  // master = audio.createGain()
+  // master.gain.value = volume.value
+  // dummy = audio.createOscillator()
+  // dummy.frequency.value = 0
+  // dummy.connect(processor)
+  // processor.connect(master)
+  // hpf = audio.createBiquadFilter()
+  // hpf.type = 'highpass'
+  // hpf.frequency.value = 300
+  // master.connect(hpf)
+  // hpf.connect(audio.destination)
+  // number.link(slider)
 }
 function draw() {
   let x = canvas.getContext('2d')
@@ -147,17 +157,16 @@ function draw() {
 playButton.onclick = () => {
   resize()
   init()
-  slider.value = 0
+  load()
   playButton.remove()
 }
 stopButton.onclick = () => {
   if (isPlaying) {
-    hpf.disconnect()
+    master.disconnect()
     isPlaying = false
     stopButton.innerHTML = 'start'
   } else {
-    tick = 0.5
-    init()
+    master.connect(audio.destination)
     isPlaying = true
     stopButton.innerHTML = 'stop'
   }
@@ -198,4 +207,23 @@ function resize() {
     slider.resize(30,100)
   }
   draw()
+}
+
+async function load() {
+  Promise.all([
+    load2buf('1.mp3', b => { players[0] = new Player(b, true)}),
+    load2buf('2.mp3', b => { players[1] = new Player(b, true)}),
+    load2buf('3.mp3', b => { players[2] = new Player(b, true)}),
+    load2buf('4.mp3', b => { players[3] = new Player(b, true)}),
+    load2buf('5.mp3', b => { players[4] = new Player(b, true)}),
+    load2buf('6.mp3', b => { players[5] = new Player(b, true)}),
+    load2buf('7.mp3', b => { players[6] = new Player(b, true)}),
+    load2buf('8.mp3', b => { players[7] = new Player(b, true)}),
+    load2buf('9.mp3', b => { players[8] = new Player(b, true)}),
+    load2buf('10.mp3', b => { players[9] = new Player(b, true)}),
+  ]).then(() => {
+    for (const player of players) player.play(0.1, 0)
+    players[0].setAmp(1, 0.1)
+    number.link(slider)
+  })
 }
