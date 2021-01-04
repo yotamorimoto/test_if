@@ -17,15 +17,16 @@ class Panner {
 }
 class Env {
   constructor(level=1, offset=0) {
+    const now = audio.currentTime
     this.vca = audio.createGain()
     this.level = level
     this.offset = offset
+    this.vca.gain.setValueAtTime(this.offset, now)
   }
 }
 class Perc extends Env {
   trigger(attack, release) {
     const now = audio.currentTime
-    this.vca.gain.setValueAtTime(this.offset, now)
     this.vca.gain.linearRampToValueAtTime(this.level, now + attack)
     this.vca.gain.exponentialRampToValueAtTime(Math.max(eps, this.offset), now + attack + release)
   }
@@ -33,7 +34,6 @@ class Perc extends Env {
 class AR extends Env {
   trigger(attack, release) {
     const now = audio.currentTime
-    this.vca.gain.setValueAtTime(this.offset, now)
     this.vca.gain.linearRampToValueAtTime(this.level, now + attack)
     this.vca.gain.linearRampToValueAtTime(this.offset, now + attack + release)
   }
@@ -41,8 +41,6 @@ class AR extends Env {
 class ASR extends Env {
   trigger(attack, sustain, release) {
     const now = audio.currentTime
-    this.vca.gain.cancelScheduledValues(now)
-    this.vca.gain.setValueAtTime(this.offset, now)
     this.vca.gain.linearRampToValueAtTime(this.level, now + attack)
     this.vca.gain.setValueAtTime(this.level, now + attack + sustain)
     this.vca.gain.linearRampToValueAtTime(0, now + attack + sustain + release)

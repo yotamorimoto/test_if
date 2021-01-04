@@ -1,14 +1,14 @@
 import { midicps, load2buf } from '../auditory-demo/sc.js'
-import { Player } from '../auditory-demo/synth.js'
+import { Sine, Player } from '../auditory-demo/synth.js'
 
 window.AudioContext = window.AudioContext || window.webkitAudioContext
 window.audio = null
 window.master = null
-// window.hpf = null
+window.hpf = null
 document.addEventListener('DOMContentLoaded', resize)
 window.addEventListener('resize', resize)
 
-const blockSize = 1024
+const blockSize = 256
 const playButton = document.getElementById('play')
 const stopButton = document.getElementById('stop')
 const wrapper = document.getElementById('wrapper')
@@ -24,13 +24,13 @@ const slider = new Nexus.Slider('#slider', {
   'value': 1,
 })
 slider.on('change', (v) => {
-  players[v-1].setAmp(1, 0.3)
-  for (const [i, player] of players.entries()) {
-    if (!(i == (v-1))) player.setAmp(0, 0.3)
-  }
+  // players[v-1].setAmp(1, 0.3)
+  // for (const [i, player] of players.entries()) {
+  //   if (!(i == (v-1))) player.setAmp(0, 0.3)
+  // }
   interval = [0.25,0.2,0.18,0.15,0.12,0.1,0.075,0.06,0.05,0.04][9-v+1]
-  sustain = [0.2,0.15,0.09,0.08,0.07,0.07,0.05,0.04,0.03,0.015][9-v+1]
-  release = [0.01,0.01,0.01,0.01,0.005,0.005,0.005,0.005,0.001,0.001][9-v+1]
+  sustain = [0.2,0.15,0.09,0.08,0.07,0.07,0.05,0.04,0.03,0.03][9-v+1]
+  release = [0.01,0.01,0.01,0.01,0.005,0.005,0.005,0.005,0.005,0.005][9-v+1]
   linediv = [5,7,10,15,20,25,30,40,50,60][9-v+1]
   hlabel.innerHTML = `繰り返し単位の経過時間（点線区間：${ interval*4 }秒）`
   draw()
@@ -60,17 +60,17 @@ let seq = [80, 81, 80, -1]
 let players = new Array(10)
 
 
-// const onaudioprocess = () => {
-//   if (tick - audio.currentTime < (blockSize / audio.sampleRate)) {
-//     const note = seq[counter%4]
-//     if (note > 0) {
-//       const amp = 1/5
-//       Sine(midicps(note), amp, release, sustain, release)
-//     }
-//     tick += interval
-//     counter++
-//   }
-// }
+const onaudioprocess = () => {
+  if (tick - audio.currentTime < (blockSize / audio.sampleRate)) {
+    const note = seq[counter%4]
+    if (note > 0) {
+      const amp = 1/5
+      Sine(midicps(note), amp, release, sustain, release)
+    }
+    tick += interval
+    counter++
+  }
+}
 function init() {
   audio = new AudioContext({
     sampleRate: 48000,
@@ -80,20 +80,20 @@ function init() {
   master.gain.value = volume.value
   master.connect(audio.destination)
 
-  // processor = audio.createScriptProcessor(blockSize)
-  // processor.onaudioprocess = onaudioprocess
-  // master = audio.createGain()
-  // master.gain.value = volume.value
-  // dummy = audio.createOscillator()
-  // dummy.frequency.value = 0
-  // dummy.connect(processor)
-  // processor.connect(master)
-  // hpf = audio.createBiquadFilter()
-  // hpf.type = 'highpass'
-  // hpf.frequency.value = 300
-  // master.connect(hpf)
-  // hpf.connect(audio.destination)
-  // number.link(slider)
+  processor = audio.createScriptProcessor(blockSize)
+  processor.onaudioprocess = onaudioprocess
+  master = audio.createGain()
+  master.gain.value = volume.value
+  dummy = audio.createOscillator()
+  dummy.frequency.value = 0
+  dummy.connect(processor)
+  processor.connect(master)
+  hpf = audio.createBiquadFilter()
+  hpf.type = 'highpass'
+  hpf.frequency.value = 300
+  master.connect(hpf)
+  hpf.connect(audio.destination)
+  number.link(slider)
 }
 function draw() {
   let x = canvas.getContext('2d')
@@ -157,7 +157,7 @@ function draw() {
 playButton.onclick = () => {
   resize()
   init()
-  load()
+  // load()
   playButton.remove()
 }
 stopButton.onclick = () => {
