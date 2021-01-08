@@ -75,6 +75,16 @@ export function Sine(freq, amp, atk, sus, rls) {
   env.trigger(atk, sus, rls)
   schedTrash(atk+sus+rls, vco)
 }
+export function SinePan(freq, amp, atk, sus, rls, pan) {
+  const vco = audio.createOscillator()
+  const env = new ASR(amp)
+  const panner = new Panner(pan)
+  vco.frequency.value = freq
+  connect(vco, env.vca, panner, master)
+  vco.start()
+  env.trigger(atk, sus, rls)
+  schedTrash(atk+sus+rls, vco)
+}
 export function Osc(freq, amp, atk, sus, rls, pan) {
   const vco = audio.createOscillator()
   const env = new ASR(amp)
