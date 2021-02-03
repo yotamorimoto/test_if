@@ -51,13 +51,17 @@
   border: 1px solid grey;
   color:#2bb;
   font-size:15px;
-   padding:0;
+  padding:0;
   margin-right:5px;
   display:inline;
 float:right;
 }
 #hlabel {
   text-align:center;
+}
+.auxlabel {
+  padding-left: 20px;
+  text-align:left;
 }
 #control {
   height:20px;
